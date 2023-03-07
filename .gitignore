@@ -1,0 +1,40 @@
+# Ignore all dot files except
+.*
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.flake8
+
+######################
+# Python
+######################
+venv/
+build/
+.pytest_cache
+__pycache__/
+dist/
+*.egg-info/
+.pytest_cache/
+
+######################
+# Node
+######################
+node_modules/
+
+######################
+# Intellij Idea
+######################
+*.iml
+.idea/
+
+######################
+# Visual Studio Code
+######################
+.vscode/
+
+######################
+# Other
+######################
+env.py
+output/
+**/application-local.yaml
