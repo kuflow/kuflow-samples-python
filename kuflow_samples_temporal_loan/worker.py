@@ -51,8 +51,7 @@ async def run_worker():
     # management of the Temporal.io worker's authorization token.
     kuflow_client = KuFlowRestClient(
         client_id=client_id,
-        client_secret=client_secret,
-        endpoint="https://api.sandbox.kuflow.com/v2022-10-08"
+        client_secret=client_secret
     )
 
     # Initializing an KuFlow token provider
