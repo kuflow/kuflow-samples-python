@@ -55,7 +55,7 @@ async def run_worker():
     )
 
     # Initializing an KuFlow token provider
-    kuFlow_authorization_token_provider = KuFlowAuthorizationTokenProvider(
+    kuflow_authorization_token_provider = KuFlowAuthorizationTokenProvider(
         kuflow_client=kuflow_client
     )
 
@@ -68,7 +68,7 @@ async def run_worker():
             client_cert=client_cert,
             client_private_key=client_key,
         ),
-        rpc_metadata=kuFlow_authorization_token_provider.initialize_rpc_auth_metadata(),
+        rpc_metadata=kuflow_authorization_token_provider.initialize_rpc_auth_metadata(),
         data_converter=dataclasses.replace(
             DataConverter.default,
             payload_converter_class=KuFlowPayloadConverter,
@@ -77,7 +77,7 @@ async def run_worker():
 
     # Important. Do not forget.
     # Start in background, the auto-renewal of the Temporal.io connection token.
-    kuFlow_authorization_token_provider.start_auto_refresh(client)
+    kuflow_authorization_token_provider.start_auto_refresh(client)
 
     # Initializing KuFlow Temporal.io activities
     kuflow_sync_activities = KuFlowSyncActivities(kuflow_client)
