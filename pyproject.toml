@@ -12,10 +12,10 @@ packages = [
     { include = "**/*.py", from = "."  }
 ]
 
-
 [tool.poetry.dependencies]
+deepmerge = "^1.1.0"
+kuflow-temporal-activity-kuflow = "^0.7.1"
 python = "^3.8"
-kuflow-temporal-activity-kuflow = "^0.4.1"
 pyyaml = "^6.0"
 
 [tool.poetry.dev-dependencies]
