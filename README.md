@@ -16,10 +16,6 @@ KuFlow is an implementation language agnostic Cloud platform. This repository is
 
 Documentation on how to integrate with KuFlow using Python is available [here](https://docs.kuflow.com/developers).
 
-## Contributing
-
-We are happy to receive your help and comments, together we will dance a wonderful KuFlow. Please review our [contribution guide](CONTRIBUTING.md).
-
 ## License
 
 [MIT License](https://github.com/kuflow/kuflow-samples-python/blob/master/LICENSE)
