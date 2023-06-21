@@ -32,10 +32,10 @@ with workflow.unsafe.imports_passed_through():
     from kuflow_rest import models
     from kuflow_rest.utils import TaskUtils
     from kuflow_temporal_activity_kuflow import (
-        models as models_temporal,
-        KuFlowSyncActivities,
         KuFlowAsyncActivities,
+        KuFlowSyncActivities,
     )
+    from kuflow_temporal_activity_kuflow import models as models_temporal
     from kuflow_temporal_activity_kuflow.utils import SaveProcessElementRequestUtils
 
     from kuflow_samples_temporal_loan.activities import (
@@ -71,11 +71,11 @@ class SampleWorkflow:
             task_loan_application, "LAST_NAME"
         )
 
-        id = str(workflow.uuid4())
+        task_id = str(workflow.uuid4())
 
         task_definition = models.TaskDefinitionSummary(code=self.TASK_CODE_APPROVE_LOAN)
         task = models.Task(
-            id=id,
+            id=task_id,
             process_id=task_loan_application.process_id,
             task_definition=task_definition,
         )
@@ -93,7 +93,7 @@ class SampleWorkflow:
 
         retrieve_task_response: models_temporal.RetrieveTaskResponse = await workflow.execute_activity(
             KuFlowSyncActivities.retrieve_task,
-            models_temporal.RetrieveTaskRequest(task_id=id),
+            models_temporal.RetrieveTaskRequest(task_id=task_id),
             start_to_close_timeout=self._kuflow_activity_sync_start_to_close_timeout,
             schedule_to_close_timeout=self._kuflow_activity_sync_schedule_to_close_timeout,
             retry_policy=self._default_retry_policy,
@@ -104,13 +104,13 @@ class SampleWorkflow:
     async def create_task_loan__application(self, process_id: str):
         """Create task "Loan Application" in KuFlow and wait for its completion"""
 
-        id = str(workflow.uuid4())
+        task_id = str(workflow.uuid4())
 
         task_definition = models.TaskDefinitionSummary(
             code=self.TASK_CODE_LOAN_APPLICATION_FORM
         )
         task = models.Task(
-            id=id, process_id=process_id, task_definition=task_definition
+            id=task_id, process_id=process_id, task_definition=task_definition
         )
 
         await workflow.execute_activity(
@@ -123,7 +123,7 @@ class SampleWorkflow:
 
         retrieve_task_response: models_temporal.RetrieveTaskResponse = await workflow.execute_activity(
             KuFlowSyncActivities.retrieve_task,
-            models_temporal.RetrieveTaskRequest(task_id=id),
+            models_temporal.RetrieveTaskRequest(task_id=task_id),
             start_to_close_timeout=self._kuflow_activity_sync_start_to_close_timeout,
             schedule_to_close_timeout=self._kuflow_activity_sync_schedule_to_close_timeout,
             retry_policy=self._default_retry_policy,
@@ -134,13 +134,13 @@ class SampleWorkflow:
     async def create_task_notification_of_loan_granted(self, process_id: str):
         """Create task "Notification of loan granted" in KuFlow and wait for its completion"""
 
-        id = str(workflow.uuid4())
+        task_id = str(workflow.uuid4())
 
         task_definition = models.TaskDefinitionSummary(
             code=self.TASK_CODE_NOTIFICATION_OF_LOAN_GRANTED
         )
         task = models.Task(
-            id=id, process_id=process_id, task_definition=task_definition
+            id=task_id, process_id=process_id, task_definition=task_definition
         )
 
         await workflow.execute_activity(
@@ -154,13 +154,13 @@ class SampleWorkflow:
     async def create_task_notification_of_loan_rejection(self, process_id: str):
         """Create task "Notification of loan rejection" in KuFlow and wait for its completion"""
 
-        id = str(workflow.uuid4())
+        task_id = str(workflow.uuid4())
 
         task_definition = models.TaskDefinitionSummary(
             code=self.TASK_CODE_NOTIFICATION_OF_LOAN_REJECTION
         )
         task = models.Task(
-            id=id, process_id=process_id, task_definition=task_definition
+            id=task_id, process_id=process_id, task_definition=task_definition
         )
 
         await workflow.execute_activity(

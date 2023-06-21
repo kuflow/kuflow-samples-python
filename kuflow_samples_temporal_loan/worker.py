@@ -25,29 +25,24 @@
 
 import asyncio
 import logging
-import yaml
-
 from pathlib import Path
-from deepmerge import always_merger
-
 from typing import Optional
 
-from temporalio.client import TLSConfig
-
+import yaml
+from deepmerge import always_merger
 from kuflow_rest import KuFlowRestClient
+from kuflow_temporal_activity_kuflow import KuFlowAsyncActivities, KuFlowSyncActivities
 from kuflow_temporal_common.connection import (
-    KuFlowTemporalConnection,
     KuFlowConfig,
-    TemporalConfig,
+    KuFlowTemporalConnection,
     TemporalClientConfig,
+    TemporalConfig,
     TemporalWorkerConfig,
 )
-from kuflow_temporal_activity_kuflow import KuFlowAsyncActivities, KuFlowSyncActivities
+from temporalio.client import TLSConfig
 
-
-from kuflow_samples_temporal_loan.activities import CurrencyConversionActivities
-from kuflow_samples_temporal_loan.workflow import SampleWorkflow
-
+from .activities import CurrencyConversionActivities
+from .workflow import SampleWorkflow
 
 logging.basicConfig(level=logging.INFO)
 
@@ -60,7 +55,7 @@ async def run_worker():
     worker for the set of activities that interact with the KuFlow Api rest.
     """
 
-    configuration = load_configurations()
+    configuration = load_configuration()
 
     # Rest client for the KuFlow API
     # Necessary for the activities that connect to KuFlow, as well as for the
@@ -148,10 +143,10 @@ class SamplesConfiguration:
         self.temporal_client_key = temporal_client_key
 
 
-def load_configurations() -> SamplesConfiguration:
-    configration_base = load_configuration("application.yaml")
-    configration_local = load_configuration("application-local.yaml")
-    configuration = always_merger.merge(configration_base, configration_local)
+def load_configuration() -> SamplesConfiguration:
+    configuration_base = read_configuration("application.yaml")
+    configuration_local = read_configuration("application-local.yaml")
+    configuration = always_merger.merge(configuration_base, configuration_local)
 
     return parse_configuration(configuration)
 
@@ -183,7 +178,7 @@ def parse_configuration(configuration) -> SamplesConfiguration:
     )
 
 
-def load_configuration(file: str) -> dict:
+def read_configuration(file: str) -> dict:
     configuration_path = Path(__file__).with_name(file)
 
     if configuration_path.exists() is False:
