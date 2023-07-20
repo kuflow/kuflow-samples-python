@@ -171,17 +171,6 @@ class SampleWorkflow:
             retry_policy=self._default_retry_policy,
         )
 
-    async def complete_process(self, process_id: str):
-        """Complete Workflow"""
-
-        await workflow.execute_activity(
-            KuFlowSyncActivities.complete_process,
-            models_temporal.CompleteProcessRequest(process_id),
-            start_to_close_timeout=self._kuflow_activity_sync_start_to_close_timeout,
-            schedule_to_close_timeout=self._kuflow_activity_sync_schedule_to_close_timeout,
-            retry_policy=self._default_retry_policy,
-        )
-
     async def update_process_metadata(self, task_loan_application: models.Task):
         await self.copy_task_element_to_process(task_loan_application, "FIRST_NAME")
         await self.copy_task_element_to_process(task_loan_application, "LAST_NAME")

@@ -39,10 +39,10 @@ from kuflow_temporal_common.connection import (
     TemporalConfig,
     TemporalWorkerConfig,
 )
-from temporalio.client import TLSConfig
+from temporalio.service import TLSConfig
 
-from .activities import CurrencyConversionActivities
-from .workflow import SampleWorkflow
+from kuflow_samples_temporal_loan.activities import CurrencyConversionActivities
+from kuflow_samples_temporal_loan.workflow import SampleWorkflow
 
 logging.basicConfig(level=logging.INFO)
 
