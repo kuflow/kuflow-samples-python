@@ -107,40 +107,28 @@ async def run_worker():
 
 
 class SamplesConfiguration:
+    kuflow_api_endpoint: Optional[str]
     kuflow_api_client_id: str
     kuflow_api_client_secret: str
-    kuflow_api_endpoint: Optional[str]
 
     temporal_host: str
-    temporal_namespace: str
     temporal_queue: str
-    temporal_server_root_ca_cert: bytes
-    temporal_client_cert: bytes
-    temporal_client_key: bytes
 
     def __init__(
         self,
         *,
+        kuflow_api_endpoint: Optional[str] = None,
         kuflow_api_client_id: str,
         kuflow_api_client_secret: str,
-        kuflow_api_endpoint: Optional[str] = None,
         temporal_host: Optional[str] = None,
-        temporal_namespace: str,
         temporal_queue: str,
-        temporal_server_root_ca_cert: bytes,
-        temporal_client_cert: bytes,
-        temporal_client_key: bytes,
     ):
+        self.kuflow_api_endpoint = kuflow_api_endpoint
         self.kuflow_api_client_id = kuflow_api_client_id
         self.kuflow_api_client_secret = kuflow_api_client_secret
-        self.kuflow_api_endpoint = kuflow_api_endpoint
 
         self.temporal_host = temporal_host
-        self.temporal_namespace = temporal_namespace
         self.temporal_queue = temporal_queue
-        self.temporal_server_root_ca_cert = temporal_server_root_ca_cert
-        self.temporal_client_cert = temporal_client_cert
-        self.temporal_client_key = temporal_client_key
 
 
 def load_configuration() -> SamplesConfiguration:
@@ -156,25 +144,14 @@ def parse_configuration(configuration) -> SamplesConfiguration:
     kuflow_api_client_id = configuration["kuflow"]["api"]["client-id"]
     kuflow_api_client_secret = configuration["kuflow"]["api"]["client-secret"]
     temporal_host = configuration["temporal"].get("target")
-    temporal_namespace = configuration["temporal"]["namespace"]
     temporal_queue = configuration["temporal"]["kuflow-queue"]
-    temporal_server_root_ca_cert = configuration["temporal"]["mutual-tls"]["ca-data"]
-    temporal_server_root_ca_cert = temporal_server_root_ca_cert.encode("utf-8")
-    temporal_client_cert = configuration["temporal"]["mutual-tls"]["cert-data"]
-    temporal_client_cert = temporal_client_cert.encode("utf-8")
-    temporal_client_key = configuration["temporal"]["mutual-tls"]["key-data"]
-    temporal_client_key = temporal_client_key.encode("utf-8")
 
     return SamplesConfiguration(
         kuflow_api_endpoint=kuflow_api_endpoint,
         kuflow_api_client_id=kuflow_api_client_id,
         kuflow_api_client_secret=kuflow_api_client_secret,
         temporal_host=temporal_host,
-        temporal_namespace=temporal_namespace,
         temporal_queue=temporal_queue,
-        temporal_server_root_ca_cert=temporal_server_root_ca_cert,
-        temporal_client_cert=temporal_client_cert,
-        temporal_client_key=temporal_client_key,
     )
 
 
