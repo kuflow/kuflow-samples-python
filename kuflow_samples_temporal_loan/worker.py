@@ -31,7 +31,7 @@ from typing import Optional
 import yaml
 from deepmerge import always_merger
 from kuflow_rest import KuFlowRestClient
-from kuflow_temporal_activity_kuflow import KuFlowAsyncActivities, KuFlowSyncActivities
+from kuflow_temporal_activity_kuflow import KuFlowActivities
 from kuflow_temporal_common.connection import (
     KuFlowConfig,
     KuFlowTemporalConnection,
@@ -67,17 +67,14 @@ async def run_worker():
     )
 
     # Initializing KuFlow Temporal.io activities
-    kuflow_sync_activities = KuFlowSyncActivities(kuflow_rest_client)
-    kuflow_async_activities = KuFlowAsyncActivities(kuflow_rest_client)
+    kuflow_activities = KuFlowActivities(kuflow_rest_client)
 
     # Initializing custom activities
     currency_conversion_activities = CurrencyConversionActivities()
 
     # Activities for the worker
     activities = (
-        kuflow_sync_activities.activities
-        + kuflow_async_activities.activities
-        + currency_conversion_activities.activities
+        kuflow_activities.activities + currency_conversion_activities.activities
     )
 
     # KuFlow Temporal connection
@@ -86,12 +83,6 @@ async def run_worker():
         temporal=TemporalConfig(
             client=TemporalClientConfig(
                 target_host=configuration.temporal_host,
-                namespace=configuration.temporal_namespace,
-                tls=TLSConfig(
-                    server_root_ca_cert=configuration.temporal_server_root_ca_cert,
-                    client_cert=configuration.temporal_client_cert,
-                    client_private_key=configuration.temporal_client_key,
-                ),
             ),
             worker=TemporalWorkerConfig(
                 task_queue=configuration.temporal_queue,
