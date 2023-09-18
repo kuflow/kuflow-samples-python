@@ -84,7 +84,7 @@ class SampleWorkflow:
 
         loan_authorized = True
         if amount_eur > 5000:
-            task_approve__loan = await self.create_task_approve__loan(
+            task_approve__loan = await self._create_task_approve__loan(
                 task_loan_application, amount_eur
             )
 
@@ -103,7 +103,7 @@ class SampleWorkflow:
             f"Completed process {request.process_id}"
         )
 
-    async def create_task_approve__loan(
+    async def _create_task_approve__loan(
         self, task_loan_application: models.Task, amount_eur
     ) -> models.Task:
         """Create task "Approve Loan" in KuFlow and wait for its completion"""
