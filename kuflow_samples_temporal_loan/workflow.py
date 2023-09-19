@@ -137,7 +137,7 @@ class SampleWorkflow:
             models_temporal.RetrieveTaskRequest(task_id=task_id),
             start_to_close_timeout=SampleWorkflow._KUFLOW_ACTIVITY_START_TO_CLOSE_TIMEOUT,
             schedule_to_close_timeout=SampleWorkflow._KUFLOW_ACTIVITY_SCHEDULE_TO_CLOSE_TIMEOUT,
-            retry_policy=self._KUFLOW_ACTIVITY_RETRY_POLICY,
+            retry_policy=SampleWorkflow._KUFLOW_ACTIVITY_RETRY_POLICY,
         )
 
         return retrieve_task_response.task
