@@ -98,13 +98,6 @@ async def run_worker():
 
 
 class SamplesConfiguration:
-    kuflow_api_endpoint: Optional[str]
-    kuflow_api_client_id: str
-    kuflow_api_client_secret: str
-
-    temporal_host: str
-    temporal_queue: str
-
     def __init__(
         self,
         *,
