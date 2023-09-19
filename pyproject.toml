@@ -14,12 +14,12 @@ packages = [
 
 [tool.poetry.dependencies]
 deepmerge = "^1.1.0"
-kuflow-temporal-activity-kuflow = "^1.0.0"
+kuflow-temporal-activity-kuflow = "^1.1.0"
 python = "^3.8"
 pyyaml = "^6.0"
 
 [tool.poetry.dev-dependencies]
-flake8 = "4.0.1"
+flake8 = "^4.0.1"
 black = "^23.1.0"
 pytest = "^7.2.1"
 isort = "^5.12.0"
