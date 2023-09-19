@@ -294,14 +294,14 @@ requirements-deprecated-finder = ["pip-api", "pipreqs"]
 
 [[package]]
 name = "kuflow-rest"
-version = "1.1.0"
+version = "1.1.1"
 description = "Client for KuFlow Rest Api"
 category = "main"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "kuflow_rest-1.1.0-py3-none-any.whl", hash = "sha256:9ea6c94b55a9e9ea90b9eec7e064a29cc4c162e7075eff207a876b6ef5ad2637"},
-    {file = "kuflow_rest-1.1.0.tar.gz", hash = "sha256:fa0dc72bc93da980f3718bef89231f5fd2cd2d05ea0a905185f04ab228c5f825"},
+    {file = "kuflow_rest-1.1.1-py3-none-any.whl", hash = "sha256:81deaa9f56ec0691b295885df535adb89a2283a92c996c6fe193d632e1be5ba6"},
+    {file = "kuflow_rest-1.1.1.tar.gz", hash = "sha256:4ea04b1ea534f6580ecaf6a14865bbe9692ae54154152650f86736a8ce7e0791"},
 ]
 
 [package.dependencies]
@@ -310,35 +310,35 @@ isodate = ">=0.6.1,<0.7.0"
 
 [[package]]
 name = "kuflow-temporal-activity-kuflow"
-version = "1.1.0"
+version = "1.1.1"
 description = "KuFlow SDK :: Temporal.io activities to interact with KuFlow"
 category = "main"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "kuflow_temporal_activity_kuflow-1.1.0-py3-none-any.whl", hash = "sha256:f4125b1c2c74e904cfeab4d0e3f35cc19245a84cf0373dd80791cfcff085197c"},
-    {file = "kuflow_temporal_activity_kuflow-1.1.0.tar.gz", hash = "sha256:05cc1daa8a50f4db1b857c2033ad938eefaff28357e04417a91f12a3b5f50525"},
+    {file = "kuflow_temporal_activity_kuflow-1.1.1-py3-none-any.whl", hash = "sha256:3e62044a25f7bc03c8c7084434621d28550e02e69c85dde56a352f631ae7bc0b"},
+    {file = "kuflow_temporal_activity_kuflow-1.1.1.tar.gz", hash = "sha256:a56ddab82405a2d9ff7163d1d075cd0673735a9f7f08fe9700a0c44567ff87b4"},
 ]
 
 [package.dependencies]
-kuflow-temporal-common = ">=1.1.0,<2.0.0"
+kuflow-temporal-common = ">=1.1.1,<2.0.0"
 
 [[package]]
 name = "kuflow-temporal-common"
-version = "1.1.0"
+version = "1.1.1"
 description = "KuFlow utilities to use Temporal.io"
 category = "main"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "kuflow_temporal_common-1.1.0-py3-none-any.whl", hash = "sha256:51cc3dc6886fc69696e1e6a427d669edc42e837f0b96bc064f4b41b565c3e8e9"},
-    {file = "kuflow_temporal_common-1.1.0.tar.gz", hash = "sha256:f2d2d9fbfe21863db57bb9924e37e6c7325d92b11a7000e5ccf7374a522a31cd"},
+    {file = "kuflow_temporal_common-1.1.1-py3-none-any.whl", hash = "sha256:540437ddc47d433ad2935b5e5046f47d862f9946f13c782223cb67ba71545abf"},
+    {file = "kuflow_temporal_common-1.1.1.tar.gz", hash = "sha256:28bbfd2b3a9b2b7c5be3507ba871818d61365543452d86035f5caa983da35bb2"},
 ]
 
 [package.dependencies]
 azure-core = ">=1.26.4,<2.0.0"
 isodate = ">=0.6.1,<0.7.0"
-kuflow-rest = ">=1.1.0,<2.0.0"
+kuflow-rest = ">=1.1.1,<2.0.0"
 temporalio = "1.2.0"
 
 [[package]]
