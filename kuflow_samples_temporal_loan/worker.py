@@ -1,4 +1,3 @@
-# coding=utf-8
 #
 # MIT License
 #
@@ -25,6 +24,7 @@
 
 import asyncio
 import logging
+import os
 from pathlib import Path
 from typing import Optional
 
@@ -42,6 +42,7 @@ from kuflow_temporal_common.connection import (
 
 from kuflow_samples_temporal_loan.activities import CurrencyConversionActivities
 from kuflow_samples_temporal_loan.workflow import SampleWorkflow
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -72,9 +73,7 @@ async def run_worker():
     currency_conversion_activities = CurrencyConversionActivities()
 
     # Activities for the worker
-    activities = (
-        kuflow_activities.activities + currency_conversion_activities.activities
-    )
+    activities = kuflow_activities.activities + currency_conversion_activities.activities
 
     # KuFlow Temporal connection
     kuflow_temporal_connection = KuFlowTemporalConnection(
@@ -123,11 +122,13 @@ def load_configuration() -> SamplesConfiguration:
 
 
 def parse_configuration(configuration) -> SamplesConfiguration:
-    kuflow_api_endpoint = configuration["kuflow"]["api"].get("endpoint")
-    kuflow_api_client_id = configuration["kuflow"]["api"]["client-id"]
-    kuflow_api_client_secret = configuration["kuflow"]["api"]["client-secret"]
-    temporal_host = configuration["temporal"].get("target")
-    temporal_queue = configuration["temporal"]["kuflow-queue"]
+    kuflow_api_endpoint = find_configuration_property(configuration, "KUFLOW_API_ENDPOINT", "kuflow.api.endpoint")
+    kuflow_api_client_id = retrieve_configuration_property(configuration, "KUFLOW_API_CLIENTID", "kuflow.api.client-id")
+    kuflow_api_client_secret = retrieve_configuration_property(
+        configuration, "KUFLOW_API_CLIENTSECRET", "kuflow.api.client-secret"
+    )
+    temporal_host = find_configuration_property(configuration, "TEMPORAL_TARGET", "temporal.target")
+    temporal_queue = retrieve_configuration_property(configuration, "TEMPORAL_KUFLOWQUEUE", "temporal.kuflow-queue")
 
     return SamplesConfiguration(
         kuflow_api_endpoint=kuflow_api_endpoint,
@@ -138,13 +139,47 @@ def parse_configuration(configuration) -> SamplesConfiguration:
     )
 
 
+def retrieve_configuration_property(configuration: dict, property_environment_name: str, property_path: str) -> str:
+    value = find_configuration_property(configuration, property_environment_name, property_path)
+    if value is None:
+        raise Exception(f"Property {property_path} not found")
+
+    return find_configuration_property_from_conf(configuration, property_path)
+
+
+def find_configuration_property(
+    configuration: dict, property_environment_name: str, property_path: str
+) -> Optional[str]:
+    if os.getenv(property_environment_name):
+        return os.getenv(property_environment_name)
+
+    return find_configuration_property_from_conf(configuration, property_path)
+
+
+def find_configuration_property_from_conf(configuration: dict, property_path: str) -> Optional[str]:
+    property_parts = property_path.split(".", 1)
+    property_name = property_parts[0] if len(property_parts) >= 1 else ""
+    property_path_rest = property_parts[1] if len(property_parts) == 2 else ""
+    value = configuration.get(property_name)
+    if value is None:
+        return None
+
+    if isinstance(value, dict):
+        return find_configuration_property_from_conf(value, property_path_rest)
+
+    if isinstance(value, str) or isinstance(value, bool) or isinstance(value, int) or isinstance(value, float):
+        return str(value)
+
+    return None
+
+
 def read_configuration(file: str) -> dict:
     configuration_path = Path(__file__).with_name(file)
 
     if configuration_path.exists() is False:
         return {}
 
-    with open(Path(__file__).with_name(file), "r") as file:
+    with open(Path(__file__).with_name(file)) as file:
         yaml_data = yaml.safe_load(file)
 
         return dict(yaml_data)
