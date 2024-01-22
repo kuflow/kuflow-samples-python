@@ -1,4 +1,3 @@
-# coding=utf-8
 #
 # MIT License
 #
@@ -28,6 +27,7 @@ from typing import List
 
 from temporalio import workflow
 from temporalio.common import RetryPolicy
+
 
 with workflow.unsafe.imports_passed_through():
     from kuflow_rest import models
@@ -65,14 +65,10 @@ class SampleWorkflow:
         self._kuflow_completed_task_ids.append(task_id)
 
     @workflow.run
-    async def run(
-        self, request: models_temporal.WorkflowRequest
-    ) -> models_temporal.WorkflowResponse:
+    async def run(self, request: models_temporal.WorkflowRequest) -> models_temporal.WorkflowResponse:
         workflow.logger.info(f"Process {request.process_id} started")
 
-        task_loan_application = await self._create_task_loan__application(
-            request.process_id
-        )
+        task_loan_application = await self._create_task_loan__application(request.process_id)
 
         await self._update_process_metadata(task_loan_application)
 
@@ -84,14 +80,10 @@ class SampleWorkflow:
 
         loan_authorized = True
         if amount_eur > 5000:
-            task_approve__loan = await self._create_task_approve__loan(
-                task_loan_application, amount_eur
-            )
+            task_approve__loan = await self._create_task_approve__loan(task_loan_application, amount_eur)
 
             # Approval is mandatory and not multiple
-            approval = TaskUtils.get_element_value_as_str(
-                task_approve__loan, "APPROVAL"
-            )
+            approval = TaskUtils.get_element_value_as_str(task_approve__loan, "APPROVAL")
             loan_authorized = approval == "YES"
 
         if loan_authorized:
@@ -99,28 +91,18 @@ class SampleWorkflow:
         else:
             await self._create_task_notification_of_loan_rejection(request.process_id)
 
-        return models_temporal.WorkflowResponse(
-            f"Completed process {request.process_id}"
-        )
+        return models_temporal.WorkflowResponse(f"Completed process {request.process_id}")
 
-    async def _create_task_approve__loan(
-        self, task_loan_application: models.Task, amount_eur
-    ) -> models.Task:
+    async def _create_task_approve__loan(self, task_loan_application: models.Task, amount_eur) -> models.Task:
         """Create task "Approve Loan" in KuFlow and wait for its completion"""
 
         # Currency is mandatory and not multiple
-        first_name = TaskUtils.get_element_value_as_str(
-            task_loan_application, "FIRST_NAME"
-        )
-        last_name = TaskUtils.get_element_value_as_str(
-            task_loan_application, "LAST_NAME"
-        )
+        first_name = TaskUtils.get_element_value_as_str(task_loan_application, "FIRST_NAME")
+        last_name = TaskUtils.get_element_value_as_str(task_loan_application, "LAST_NAME")
 
         task_id = str(workflow.uuid4())
 
-        task_definition = models.TaskDefinitionSummary(
-            code=SampleWorkflow._TASK_CODE_APPROVE_LOAN
-        )
+        task_definition = models.TaskDefinitionSummary(code=SampleWorkflow._TASK_CODE_APPROVE_LOAN)
         task = models.Task(
             id=task_id,
             process_id=task_loan_application.process_id,
@@ -147,12 +129,8 @@ class SampleWorkflow:
 
         task_id = str(workflow.uuid4())
 
-        task_definition = models.TaskDefinitionSummary(
-            code=SampleWorkflow._TASK_CODE_LOAN_APPLICATION_FORM
-        )
-        task = models.Task(
-            id=task_id, process_id=process_id, task_definition=task_definition
-        )
+        task_definition = models.TaskDefinitionSummary(code=SampleWorkflow._TASK_CODE_LOAN_APPLICATION_FORM)
+        task = models.Task(id=task_id, process_id=process_id, task_definition=task_definition)
 
         await self._create_task_and_wait_completion(task)
 
@@ -171,12 +149,8 @@ class SampleWorkflow:
 
         task_id = str(workflow.uuid4())
 
-        task_definition = models.TaskDefinitionSummary(
-            code=SampleWorkflow._TASK_CODE_NOTIFICATION_OF_LOAN_GRANTED
-        )
-        task = models.Task(
-            id=task_id, process_id=process_id, task_definition=task_definition
-        )
+        task_definition = models.TaskDefinitionSummary(code=SampleWorkflow._TASK_CODE_NOTIFICATION_OF_LOAN_GRANTED)
+        task = models.Task(id=task_id, process_id=process_id, task_definition=task_definition)
 
         await self._create_task_and_wait_completion(task)
 
@@ -185,12 +159,8 @@ class SampleWorkflow:
 
         task_id = str(workflow.uuid4())
 
-        task_definition = models.TaskDefinitionSummary(
-            code=SampleWorkflow._TASK_CODE_NOTIFICATION_OF_LOAN_REJECTION
-        )
-        task = models.Task(
-            id=task_id, process_id=process_id, task_definition=task_definition
-        )
+        task_definition = models.TaskDefinitionSummary(code=SampleWorkflow._TASK_CODE_NOTIFICATION_OF_LOAN_REJECTION)
+        task = models.Task(id=task_id, process_id=process_id, task_definition=task_definition)
 
         await self._create_task_and_wait_completion(task)
 
@@ -198,12 +168,8 @@ class SampleWorkflow:
         await self._copy_task_element_to_process(task_loan_application, "FIRST_NAME")
         await self._copy_task_element_to_process(task_loan_application, "LAST_NAME")
 
-    async def _copy_task_element_to_process(
-        self, task_loan_application: models.Task, element_definition_code: str
-    ):
-        value = TaskUtils.get_element_value_as_str(
-            task_loan_application, element_definition_code
-        )
+    async def _copy_task_element_to_process(self, task_loan_application: models.Task, element_definition_code: str):
+        value = TaskUtils.get_element_value_as_str(task_loan_application, element_definition_code)
         request = models_temporal.SaveProcessElementRequest(
             process_id=task_loan_application.process_id,
             element_definition_code=element_definition_code,
@@ -224,9 +190,7 @@ class SampleWorkflow:
 
         create_task_response: ConvertResponse = await workflow.execute_activity(
             CurrencyConversionActivities.convert,
-            ConvertRequest(
-                amount=amount, base_currency=currency.lower(), target_currency="eur"
-            ),
+            ConvertRequest(amount=amount, base_currency=currency.lower(), target_currency="eur"),
             start_to_close_timeout=SampleWorkflow._KUFLOW_ACTIVITY_START_TO_CLOSE_TIMEOUT,
             schedule_to_close_timeout=SampleWorkflow._KUFLOW_ACTIVITY_SCHEDULE_TO_CLOSE_TIMEOUT,
             retry_policy=SampleWorkflow._KUFLOW_ACTIVITY_RETRY_POLICY,
@@ -244,6 +208,4 @@ class SampleWorkflow:
             schedule_to_close_timeout=SampleWorkflow._KUFLOW_ACTIVITY_SCHEDULE_TO_CLOSE_TIMEOUT,
             retry_policy=SampleWorkflow._KUFLOW_ACTIVITY_RETRY_POLICY,
         )
-        await workflow.wait_condition(
-            lambda: task.id in self._kuflow_completed_task_ids
-        )
+        await workflow.wait_condition(lambda: task.id in self._kuflow_completed_task_ids)

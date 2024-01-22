@@ -1,4 +1,3 @@
-# coding=utf-8
 #
 # MIT License
 #
@@ -28,9 +27,8 @@ from dataclasses import dataclass
 import requests
 from temporalio import activity
 
-CONVERT_ENDPOINT = (
-    "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies"
-)
+
+CONVERT_ENDPOINT = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies"
 
 
 @dataclass
@@ -52,9 +50,7 @@ class CurrencyConversionActivities:
     @activity.defn(name="Currency_convert")
     async def convert(self, request: ConvertRequest) -> ConvertResponse:
         # Make a GET request to the API
-        response = requests.get(
-            f"{CONVERT_ENDPOINT}/{request.base_currency}/{request.target_currency}.json"
-        )
+        response = requests.get(f"{CONVERT_ENDPOINT}/{request.base_currency}/{request.target_currency}.json")
 
         # Parse the response JSON
         data = response.json()
