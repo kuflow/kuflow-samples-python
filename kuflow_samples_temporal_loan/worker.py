@@ -150,8 +150,8 @@ def retrieve_configuration_property(configuration: dict, property_environment_na
 def find_configuration_property(
     configuration: dict, property_environment_name: str, property_path: str
 ) -> Optional[str]:
-    if os.getenv(property_environment_name):
-        return os.getenv(property_environment_name)
+    if os.environ.get(property_environment_name) is not None:
+        return os.environ[property_environment_name]
 
     return find_configuration_property_from_conf(configuration, property_path)
 
