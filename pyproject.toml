@@ -15,7 +15,7 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.8"
 deepmerge = "^1.1.0"
-kuflow-temporal-activity-kuflow = "^1.2.0"
+kuflow-temporal-activity-kuflow = "^1.5.0"
 pyyaml = "^6.0"
 
 [tool.poetry.group.dev.dependencies]
