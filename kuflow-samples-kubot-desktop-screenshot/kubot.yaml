@@ -1,0 +1,21 @@
+#
+# kubot.yaml manifest
+#
+
+operations:
+  - name: Desktop screenshot to User's Home
+    shell: >-
+      python -m robocorp.tasks run kuflow-samples-kubot-desktop-screenshot/tasks-desktop-screenshot.py
+      --output-dir ${KUFLOW_EXECUTION_OUTDIR} -t run_robot
+
+  - name: Desktop screenshot to KuFlow
+    shell: >-
+      python -m robocorp.tasks run kuflow-samples-kubot-desktop-screenshot/tasks-desktop-screenshot-to-kuflow.py
+      --output-dir ${KUFLOW_EXECUTION_OUTDIR} -t run_robot
+
+tools:
+  python: 3.11.4
+
+post-install:
+  - name: Install dependencies
+    shell: pip install -r requirements.txt
