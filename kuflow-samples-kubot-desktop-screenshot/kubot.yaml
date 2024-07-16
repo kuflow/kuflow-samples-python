@@ -5,13 +5,11 @@
 operations:
   - name: Desktop screenshot to User's Home
     shell: >-
-      python -m robocorp.tasks run kuflow-samples-kubot-desktop-screenshot/tasks-desktop-screenshot.py
-      --output-dir ${KUFLOW_EXECUTION_OUTDIR} -t run_robot
+      python kuflow_samples_kubot_desktop_screenshot/tasks-desktop-screenshot.py
 
   - name: Desktop screenshot to KuFlow
     shell: >-
-      python -m robocorp.tasks run kuflow-samples-kubot-desktop-screenshot/tasks-desktop-screenshot-to-kuflow.py
-      --output-dir ${KUFLOW_EXECUTION_OUTDIR} -t run_robot
+      python -m kuflow_samples_kubot_desktop_screenshot.tasks-desktop-screenshot-to-kuflow
 
 tools:
   python: 3.11.4

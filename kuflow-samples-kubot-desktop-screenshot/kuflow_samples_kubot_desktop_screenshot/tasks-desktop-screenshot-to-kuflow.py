@@ -3,9 +3,9 @@ import logging
 import mimetypes
 import os
 
+from kuflow_rest import models as kf_models
 from PIL import ImageGrab
 
-from kuflow_rest import models as kf_models
 from kuflow_samples_kubot_desktop_screenshot.models import KuFlowEnvironmentVariablesConstants, RobotContext
 
 

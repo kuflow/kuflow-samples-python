@@ -8,9 +8,7 @@ documentation = "https://docs.kuflow.com/"
 repository = "https://github.com/kuflow/kuflow-samples-python"
 license = "MIT"
 readme = "README.md"
-packages = [
-    { include = "**/*.py", from = "."  }
-]
+packages = [{include = "kuflow_samples_kubot_desktop_screenshot"}]
 
 [build-system]
 requires = ["poetry-core"]
