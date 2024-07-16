@@ -12,8 +12,12 @@ packages = [
     { include = "**/*.py", from = "."  }
 ]
 
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "~3.11"
 deepmerge = "^1.1.0"
 kuflow-temporal-activity-kuflow = "^1.5.0"
 pyyaml = "^6.0"
@@ -21,10 +25,6 @@ pyyaml = "^6.0"
 [tool.poetry.group.dev.dependencies]
 ruff = ">=0.1.8,<1.0.0"
 pytest = "^7.2.1"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 log_cli = true

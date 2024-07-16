@@ -1,0 +1,19 @@
+#
+# kubot.yaml manifest
+#
+
+operations:
+  - name: Desktop screenshot to User's Home
+    shell: >-
+      python kuflow_samples_kubot_desktop_screenshot/tasks-desktop-screenshot.py
+
+  - name: Desktop screenshot to KuFlow
+    shell: >-
+      python -m kuflow_samples_kubot_desktop_screenshot.tasks-desktop-screenshot-to-kuflow
+
+tools:
+  python: 3.11.4
+
+post-install:
+  - name: Install dependencies
+    shell: pip install -r requirements.txt
