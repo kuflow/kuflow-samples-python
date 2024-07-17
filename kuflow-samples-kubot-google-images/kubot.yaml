@@ -1,0 +1,17 @@
+#
+# kubot.yaml manifest
+#
+
+operations:
+  - name: Extract a selected Google images
+    shell: python -m robocorp.tasks run kuflow_samples_kubot_google_images/tasks-google-images.py --output-dir ${KUFLOW_EXECUTION_OUTDIR} -t run_robot
+
+tools:
+  python: 3.11.4
+
+post-install:
+  - name: Install dependencies
+    shell: pip install -r requirements.txt
+
+  - name: Install browsers
+    shell: python -m robocorp.browser install chromium --isolated
