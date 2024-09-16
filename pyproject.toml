@@ -1,0 +1,55 @@
+[tool.poetry]
+name = "kuflow-samples-python"
+version = "0.1.0"
+description = "KuFlow amples"
+license = "MIT"
+authors = ["KuFlow S.L. <kuflow@kuflow.com>"]
+homepage = "https://kuflow.com/"
+documentation = "https://docs.kuflow.com/"
+repository = "https://github.com/kuflow/kuflow-sdk-python"
+readme = "README.md"
+include = ["VERSION", "README.md"]
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "~3.11"
+kuflow-samples-kubot-desktop-screenshot = { path = "./kuflow-samples-kubot-desktop-screenshot", develop = true }
+kuflow-samples-kubot-google-images = { path = "./kuflow-samples-kubot-google-images", develop = true }
+kuflow-samples-temporal-loan = { path = "./kuflow-samples-temporal-loan", develop = true }
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.3.0"
+ruff = ">=0.1.8,<1.0.0"
+pytest = "^7.4.2"
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+testpaths = ["tests"]
+python_files= "test_*.py"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+  "E",  # pycodestyle errors
+  "W",  # pycodestyle warnings
+  "F",  # pyflakes
+  "I",  # isort
+  "C",  # flake8-comprehensions
+  "B",  # flake8-bugbear
+  "UP", # pyupgrade
+]
+ignore = [
+  "B008", # do not perform function calls in argument defaults
+  "C901", # too complex
+]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+known-first-party = ["kuflow_samples_*"]

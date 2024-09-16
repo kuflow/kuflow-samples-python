@@ -32,7 +32,7 @@ import yaml
 from deepmerge import always_merger
 from kuflow_rest import KuFlowRestClient
 from kuflow_temporal_activity_kuflow import KuFlowActivities
-from kuflow_temporal_common.connection import (
+from kuflow_temporal_worker import (
     KuFlowConfig,
     KuFlowTemporalConnection,
     TemporalClientConfig,

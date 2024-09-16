@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "kuflow_samples_kubot_google_images"
+name = "kuflow-samples-kubot-google-images"
 version = "0.1.0"
 description = "KuFlow KuBot example. Take a screenshot of a user selected image"
 authors = ["KuFlow S.L. <kuflow@kuflow.com>"]
@@ -19,7 +19,7 @@ python = "~3.11"
 robocorp-tasks = "^3.0.1"
 robocorp-browser = "^2.3.1"
 robocorp-truststore = "^0.8.0"
-kuflow-rest = "^1.5.1"
+kuflow-rest = "^2.0.4"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.3.0"
@@ -32,23 +32,3 @@ log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 testpaths = ["tests"]
 python_files= "test_*.py"
-
-[tool.ruff]
-select = [
-  "E",  # pycodestyle errors
-  "W",  # pycodestyle warnings
-  "F",  # pyflakes
-  "I",  # isort
-  "C",  # flake8-comprehensions
-  "B",  # flake8-bugbear
-  "UP", # pyupgrade
-]
-ignore = [
-  "B008", # do not perform function calls in argument defaults
-  "C901", # too complex
-]
-line-length = 120
-
-[tool.ruff.lint.isort]
-lines-after-imports = 2
-known-first-party = ["kuflow_samples_*"]

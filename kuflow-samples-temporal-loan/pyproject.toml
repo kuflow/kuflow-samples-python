@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "kuflow-samples-python"
+name = "kuflow-samples-temporal-loan"
 version = "0.1.0"
 description = "KuFlow Python SDK samples"
 authors = ["KuFlow S.L. <kuflow@kuflow.com>"]
@@ -19,7 +19,9 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.dependencies]
 python = "~3.11"
 deepmerge = "^1.1.0"
-kuflow-temporal-activity-kuflow = "^1.5.0"
+kuflow-temporal-activity-kuflow = "^2.0.4"
+kuflow-temporal-workflow-kuflow = "^2.0.4"
+kuflow-temporal-worker = "^2.0.4"
 pyyaml = "^6.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -32,23 +34,3 @@ log_cli_level = "INFO"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 testpaths = ["tests"]
 python_files= "test_*.py"
-
-[tool.ruff]
-select = [
-  "E",  # pycodestyle errors
-  "W",  # pycodestyle warnings
-  "F",  # pyflakes
-  "I",  # isort
-  "C",  # flake8-comprehensions
-  "B",  # flake8-bugbear
-  "UP", # pyupgrade
-]
-ignore = [
-  "B008", # do not perform function calls in argument defaults
-  "C901", # too complex
-]
-line-length = 120
-
-[tool.ruff.lint.isort]
-lines-after-imports = 2
-known-first-party = ["kuflow_samples_*"]
