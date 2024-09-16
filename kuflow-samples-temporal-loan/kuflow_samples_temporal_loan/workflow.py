@@ -58,7 +58,7 @@ class SampleWorkflow:
         self._kuflow_completed_task_ids: List[str] = []
 
     @workflow.signal(name=models_workflow.KUFLOW_ENGINE_SIGNAL_PROCESS_ITEM)
-    async def kuflow_engine_completed_task(self, signal: models_workflow.SignalProcessItem) -> None:
+    async def kuflow_engine_signal_process_item(self, signal: models_workflow.SignalProcessItem) -> None:
         if signal.type == models_workflow.SignalProcessItemType.TASK:
             self._kuflow_completed_task_ids.append(signal.id)
 
