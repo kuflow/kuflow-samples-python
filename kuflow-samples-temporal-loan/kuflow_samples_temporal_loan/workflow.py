@@ -98,7 +98,7 @@ class SampleWorkflow:
     ) -> models_rest.ProcessItem:
         """Create process item "Approve Loan" in KuFlow and wait for its completion"""
 
-        # Currency is mandatory and not multiple
+        # FirstName and LastName is mandatory
         first_name = str(process_item_loan_application.task.data.value.get("FIRST_NAME"))
         last_name = str(process_item_loan_application.task.data.value.get("LAST_NAME"))
 
