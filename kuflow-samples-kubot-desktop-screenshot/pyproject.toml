@@ -16,7 +16,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 python = "~3.11"
-kuflow-rest = "^2.1.0"
+kuflow-rest = "^3.0.0"
 pillow = "^10.4.0"
 
 [tool.poetry.group.dev.dependencies]

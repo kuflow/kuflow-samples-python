@@ -108,8 +108,8 @@ class SampleWorkflow:
             id=process_item_id,
             process_id=process_item_loan_application.process_id,
             type=models_rest.ProcessItemType.TASK,
+            process_item_definition_code=SampleWorkflow._TASK_CODE_APPROVE_LOAN,
             task=models_rest.ProcessItemTaskCreateParams(
-                task_definition_code=SampleWorkflow._TASK_CODE_APPROVE_LOAN,
                 data=models_rest.JsonValue(
                     value={"FIRST_NAME": first_name, "LAST_NAME": last_name, "AMOUNT": amount_eur}
                 ),
@@ -140,9 +140,7 @@ class SampleWorkflow:
             id=process_item_id,
             process_id=process_id,
             type=models_rest.ProcessItemType.TASK,
-            task=models_rest.ProcessItemTaskCreateParams(
-                task_definition_code=SampleWorkflow._TASK_CODE_LOAN_APPLICATION_FORM
-            ),
+            process_item_definition_code=SampleWorkflow._TASK_CODE_LOAN_APPLICATION_FORM,
         )
 
         await self._create_process_item_and_wait_completion(create_request)
@@ -166,9 +164,7 @@ class SampleWorkflow:
             id=process_item_id,
             process_id=process_id,
             type=models_rest.ProcessItemType.TASK,
-            task=models_rest.ProcessItemTaskCreateParams(
-                task_definition_code=SampleWorkflow._TASK_CODE_NOTIFICATION_OF_LOAN_GRANTED,
-            ),
+            process_item_definition_code=SampleWorkflow._TASK_CODE_NOTIFICATION_OF_LOAN_GRANTED,
         )
 
         await self._create_process_item_and_wait_completion(create_request)
@@ -182,9 +178,7 @@ class SampleWorkflow:
             id=process_item_id,
             process_id=process_id,
             type=models_rest.ProcessItemType.TASK,
-            task=models_rest.ProcessItemTaskCreateParams(
-                task_definition_code=SampleWorkflow._TASK_CODE_NOTIFICATION_OF_LOAN_REJECTION,
-            ),
+            process_item_definition_code=SampleWorkflow._TASK_CODE_NOTIFICATION_OF_LOAN_REJECTION,
         )
 
         await self._create_process_item_and_wait_completion(create_request)

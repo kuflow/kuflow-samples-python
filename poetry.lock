@@ -284,14 +284,14 @@ six = "*"
 
 [[package]]
 name = "kuflow-rest"
-version = "2.0.4"
+version = "3.0.0"
 description = "Client for KuFlow Rest Api"
 category = "main"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "kuflow_rest-2.0.4-py3-none-any.whl", hash = "sha256:be02632c8999cc7c2777a8457bc7b2a58b3cabad58f1d7fd2f8b59c8a69de3e3"},
-    {file = "kuflow_rest-2.0.4.tar.gz", hash = "sha256:071f8c1c25e05550c5bd4afbec88ced1d68c23cffe71164071342d602ef763e2"},
+    {file = "kuflow_rest-3.0.0-py3-none-any.whl", hash = "sha256:c8ac50fb736801c2f8fb10ece67111533edfa15ea94ad76320ba9270a680ef0c"},
+    {file = "kuflow_rest-3.0.0.tar.gz", hash = "sha256:bf4a08681d102646889229e5c8261e7b2e20ec4d97ac5cd87d88fe657d58970e"},
 ]
 
 [package.dependencies]
@@ -309,7 +309,7 @@ files = []
 develop = true
 
 [package.dependencies]
-kuflow-rest = "^2.0.4"
+kuflow-rest = "^3.0.0"
 pillow = "^10.4.0"
 
 [package.source]
@@ -327,7 +327,7 @@ files = []
 develop = true
 
 [package.dependencies]
-kuflow-rest = "^2.0.4"
+kuflow-rest = "^3.0.0"
 robocorp-browser = "^2.3.1"
 robocorp-tasks = "^3.0.1"
 robocorp-truststore = "^0.8.0"
@@ -348,9 +348,9 @@ develop = true
 
 [package.dependencies]
 deepmerge = "^1.1.0"
-kuflow-temporal-activity-kuflow = "^2.0.4"
-kuflow-temporal-worker = "^2.0.4"
-kuflow-temporal-workflow-kuflow = "^2.0.4"
+kuflow-temporal-activity-kuflow = "^3.0.0"
+kuflow-temporal-worker = "^3.0.0"
+kuflow-temporal-workflow-kuflow = "^3.0.0"
 pyyaml = "^6.0"
 
 [package.source]
@@ -359,65 +359,65 @@ url = "kuflow-samples-temporal-loan"
 
 [[package]]
 name = "kuflow-temporal-activity-kuflow"
-version = "2.0.4"
+version = "3.0.0"
 description = "KuFlow SDK :: Temporal.io activities to interact with KuFlow"
 category = "main"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "kuflow_temporal_activity_kuflow-2.0.4-py3-none-any.whl", hash = "sha256:f89edde133d6e87a1a7073635e773b880d813a505e3ca30aa36fe39dbd24960f"},
-    {file = "kuflow_temporal_activity_kuflow-2.0.4.tar.gz", hash = "sha256:819da7d4bf822f02f0d241acb21786d095b4e06155c8a221b6b7bc71ac164a56"},
+    {file = "kuflow_temporal_activity_kuflow-3.0.0-py3-none-any.whl", hash = "sha256:e65804101a2832a45613199ec91506175f1c85fb4d6848269c0d144615d667b1"},
+    {file = "kuflow_temporal_activity_kuflow-3.0.0.tar.gz", hash = "sha256:7d8180d1e4b9a1b3edcafb07e45824c1df9dd272d386a92da11947a5d3bd21d9"},
 ]
 
 [package.dependencies]
-kuflow-temporal-common = ">=2.0.4,<3.0.0"
+kuflow-temporal-common = ">=3.0.0,<4.0.0"
 
 [[package]]
 name = "kuflow-temporal-common"
-version = "2.0.4"
+version = "3.0.0"
 description = "KuFlow utilities to use Temporal.io"
 category = "main"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "kuflow_temporal_common-2.0.4-py3-none-any.whl", hash = "sha256:031f4a9363b6301dd84d60572fe65ea7e23ccdfd642c1a30a0757a542915cb47"},
-    {file = "kuflow_temporal_common-2.0.4.tar.gz", hash = "sha256:788b73daf1556734cbe172a84af8fcf2af816acd1572ff12ba52d56dc15c9336"},
+    {file = "kuflow_temporal_common-3.0.0-py3-none-any.whl", hash = "sha256:aa95864118e787f2d6fee9d88566e9830323c7ea9e918a642dd933e019f36323"},
+    {file = "kuflow_temporal_common-3.0.0.tar.gz", hash = "sha256:f74751caa9372233243da4d7fc363f34b44401059b02c5bc37a3912158379ec3"},
 ]
 
 [package.dependencies]
-kuflow-rest = ">=2.0.4,<3.0.0"
+kuflow-rest = ">=3.0.0,<4.0.0"
 temporalio = ">=1.6.0,<1.7.0"
 
 [[package]]
 name = "kuflow-temporal-worker"
-version = "2.0.4"
+version = "3.0.0"
 description = "KuFlow utilities to use Temporal.io"
 category = "main"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "kuflow_temporal_worker-2.0.4-py3-none-any.whl", hash = "sha256:1ae3d61dbc72c0d9e676a678cf294108415eaf7e27fe04b6c0d677913459546f"},
-    {file = "kuflow_temporal_worker-2.0.4.tar.gz", hash = "sha256:2520f40f5850a3b7f2321c053d75bca9a0a4ad7ec956e2ae5087063c4179a060"},
+    {file = "kuflow_temporal_worker-3.0.0-py3-none-any.whl", hash = "sha256:d0161b5ee2439444fd7d1070be41ac773f6a0cc7728112ec0156a1d6d24380e6"},
+    {file = "kuflow_temporal_worker-3.0.0.tar.gz", hash = "sha256:58ff212caf700859e452c3f76832ea8280020f0d436dbe25efab776dbd8893a9"},
 ]
 
 [package.dependencies]
-kuflow-temporal-common = ">=2.0.4,<3.0.0"
+kuflow-temporal-common = ">=3.0.0,<4.0.0"
 temporalio = ">=1.6.0,<1.7.0"
 
 [[package]]
 name = "kuflow-temporal-workflow-kuflow"
-version = "2.0.4"
+version = "3.0.0"
 description = "KuFlow SDK :: Temporal.io workflow utilities to interact with KuFlow"
 category = "main"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "kuflow_temporal_workflow_kuflow-2.0.4-py3-none-any.whl", hash = "sha256:e4828b82827c9c4802fbb8a5af25088797a3a984625a3eb3d9d3d1cc28ff9aa6"},
-    {file = "kuflow_temporal_workflow_kuflow-2.0.4.tar.gz", hash = "sha256:38cafc8f28c739c523d0d0e9af5665ad7cbed588f853575f58ab1a727398e787"},
+    {file = "kuflow_temporal_workflow_kuflow-3.0.0-py3-none-any.whl", hash = "sha256:8cc844ba8a1f691856e29f59ec85a370bb92682cb66d392c4fac48437a1b3808"},
+    {file = "kuflow_temporal_workflow_kuflow-3.0.0.tar.gz", hash = "sha256:b3d71ea38e865cfbbfb3f336d86c1177d4061a8b930fff39cbc4fbfa1aa682cc"},
 ]
 
 [package.dependencies]
-kuflow-temporal-common = ">=2.0.4,<3.0.0"
+kuflow-temporal-common = ">=3.0.0,<4.0.0"
 
 [[package]]
 name = "mypy"
