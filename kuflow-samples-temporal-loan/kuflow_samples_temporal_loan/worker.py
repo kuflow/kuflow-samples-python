@@ -64,6 +64,7 @@ async def run_worker():
         endpoint=configuration.kuflow_api_endpoint,
         client_id=configuration.kuflow_api_client_id,
         client_secret=configuration.kuflow_api_client_secret,
+        allow_insecure_connection=True,
     )
 
     # Initializing KuFlow Temporal.io activities
