@@ -19,6 +19,7 @@ python = "~3.11"
 kuflow-samples-kubot-desktop-screenshot = { path = "./kuflow-samples-kubot-desktop-screenshot", develop = true }
 kuflow-samples-kubot-google-images = { path = "./kuflow-samples-kubot-google-images", develop = true }
 kuflow-samples-temporal-loan = { path = "./kuflow-samples-temporal-loan", develop = true }
+kuflow-samples-expense-reimbursement = { path = "./kuflow-samples-expense-reimbursement", develop = true }
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.3.0"
