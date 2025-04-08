@@ -111,7 +111,7 @@ class SampleWorkflow:
             process_item_definition_code=SampleWorkflow._TASK_CODE_APPROVE_LOAN,
             task=models_rest.ProcessItemTaskCreateParams(
                 data=models_rest.JsonValue(
-                    value={"FIRST_NAME": first_name, "LAST_NAME": last_name, "AMOUNT": amount_eur}
+                    value={"FIRST_NAME": first_name, "LAST_NAME": last_name, "AMOUNT": float(amount_eur)}
                 ),
             ),
         )
